@@ -1,5 +1,5 @@
 function numberStringSplitter(input) {
-  let inputString = input.toLowerCase();
+  let inputString = input;
   let number = inputString.match(/[.\d\/]+/g) || ["1"];
   let string = inputString.match(/[a-zA-Z]+/g)[0];
 
@@ -26,7 +26,7 @@ function ConvertHandler() {
     let num1 = nums[0];
     let num2 = nums[1] || "1";
 
-    result = Number(num1) / Number(num2);
+    result = (parseFloat(num1) / parseFloat(num2));
 
     if (isNaN(num1) || isNaN(num2)) {
       return undefined;
@@ -43,9 +43,10 @@ function ConvertHandler() {
       case "lbs":
       case "km":
       case "mi":
-      case "l":
       case "gal":
         return result;
+      case "l":
+        return "L";
       default:
         return undefined;
     }
@@ -63,7 +64,7 @@ function ConvertHandler() {
         return "mi";
       case "mi":
         return "km";
-      case "l":
+      case "L":
         return "gal";
       case "gal":
         return "L";
@@ -83,7 +84,7 @@ function ConvertHandler() {
       case "mi":
         return "miles";
       case "L":
-        return "litres";
+        return "liters";
       case "gal":
         return "gallons";
       default:
@@ -110,7 +111,7 @@ function ConvertHandler() {
       case "mi":
         result = initNum * miToKm;
         break;
-      case "l":
+      case "L":
         result = initNum / galToL;
         break;
       case "gal":
@@ -121,7 +122,7 @@ function ConvertHandler() {
         break;
     }
 
-    return Number(result).toFixed(5);
+    return parseFloat(result).toFixed(5);
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
