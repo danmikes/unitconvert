@@ -26,7 +26,7 @@ function ConvertHandler() {
     let num1 = nums[0];
     let num2 = nums[1] || "1";
 
-    result = (parseFloat(num1) / parseFloat(num2));
+    result = Number(num1 / num2);
 
     if (isNaN(num1) || isNaN(num2)) {
       return undefined;
@@ -50,6 +50,39 @@ function ConvertHandler() {
       default:
         return undefined;
     }
+  };
+  
+  this.getReturnNum = function(initNum, initUnit) {
+    const galToL = 3.78541;
+    const lbsToKg = 0.453592;
+    const miToKm = 1.60934;
+    let result;
+
+    switch (initUnit) {
+      case "kg":
+        result = initNum / lbsToKg;
+        break;
+      case "lbs":
+        result = initNum * lbsToKg;
+        break;
+      case "km":
+        result = initNum / miToKm;
+        break;
+      case "mi":
+        result = initNum * miToKm;
+        break;
+      case "L":
+        result = initNum / galToL;
+        break;
+      case "gal":
+        result = initNum * galToL;
+        break;
+      default:
+        result = "ignorant";
+        break;
+    }
+
+    return Number(result.toFixed(5));
   };
   
   this.getReturnUnit = function(initUnit) {
@@ -90,39 +123,6 @@ function ConvertHandler() {
       default:
         return "ignoro";
     }
-  };
-  
-  this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
-    let result;
-
-    switch (initUnit) {
-      case "kg":
-        result = initNum / lbsToKg;
-        break;
-      case "lbs":
-        result = initNum * lbsToKg;
-        break;
-      case "km":
-        result = initNum / miToKm;
-        break;
-      case "mi":
-        result = initNum * miToKm;
-        break;
-      case "L":
-        result = initNum / galToL;
-        break;
-      case "gal":
-        result = initNum * galToL;
-        break;
-      default:
-        result = "ignorant";
-        break;
-    }
-
-    return parseFloat(result).toFixed(5);
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
