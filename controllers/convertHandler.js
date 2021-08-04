@@ -1,4 +1,4 @@
-function numberStringSplitter(input) {
+function inputSplitter(input) {
   let number = input.match(/[.\d\/]+/g) || ["1"];
   let string = input.match(/[a-zA-Z]+/g) || [""];
 
@@ -15,7 +15,7 @@ function checkDiv(possibleFraction) {
 
 function ConvertHandler() {
   this.getNum = function (input) {
-    let result = numberStringSplitter(input)[0];
+    let result = inputSplitter(input)[0];
     let nums = checkDiv(result);
 
     if (!nums) {
@@ -35,7 +35,7 @@ function ConvertHandler() {
   };
   
   this.getUnit = function (input) {
-    let result = numberStringSplitter(input)[1].toLowerCase();
+    let result = inputSplitter(input)[1].toLowerCase();
 
     switch (result) {
       case "gal":
