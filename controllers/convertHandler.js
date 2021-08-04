@@ -1,9 +1,9 @@
 function numberStringSplitter(input) {
-  let inputString = input;
-  let number = inputString.match(/[.\d\/]+/g) || ["1"];
-  let string = inputString.match(/[a-zA-Z]+/g)[0];
+  let number = input.match(/[.\d\/]+/g) || ["1"];
+  let string = input.match(/[a-zA-Z]+/g) || [""];
+  console.log(number, string);
 
-  return [number[0], string];
+  return [number[0], string[0]];
 }
 
 function checkDiv(possibleFraction) {
@@ -35,15 +35,15 @@ function ConvertHandler() {
     return result;
   };
   
-  this.getUnit = function(input) {
-    let result = numberStringSplitter(input)[1];
+  this.getUnit = function (input) {
+    let result = numberStringSplitter(input)[1].toLowerCase();
 
     switch (result) {
-      case "kg":
-      case "lbs":
-      case "km":
-      case "mi":
       case "gal":
+      case "kg":
+      case "km":
+      case "lbs":
+      case "mi":
         return result;
       case "l":
         return "L";
@@ -52,13 +52,14 @@ function ConvertHandler() {
     }
   };
   
-  this.getReturnNum = function(initNum, initUnit) {
+  this.convert = function (initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+    let unit = initUnit.toLowerCase();
     let result;
 
-    switch (initUnit) {
+    switch (unit) {
       case "kg":
         result = initNum / lbsToKg;
         break;
@@ -71,7 +72,7 @@ function ConvertHandler() {
       case "mi":
         result = initNum * miToKm;
         break;
-      case "L":
+      case "l":
         result = initNum / galToL;
         break;
       case "gal":
@@ -86,7 +87,7 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    let result = initUnit;
+    let result = initUnit.toLowerCase();
     
     switch (result) {
       case "kg":
@@ -97,7 +98,7 @@ function ConvertHandler() {
         return "mi";
       case "mi":
         return "km";
-      case "L":
+      case "l":
         return "gal";
       case "gal":
         return "L";
@@ -106,7 +107,9 @@ function ConvertHandler() {
     }
   };
 
-  this.spellOutUnit = function(unit) {
+  this.spellOutUnit = function (initUnit) {
+    let unit = initUnit.toLowerCase();
+    
     switch (unit) {
       case "kg":
         return "kilograms";
@@ -116,7 +119,7 @@ function ConvertHandler() {
         return "kilometers";
       case "mi":
         return "miles";
-      case "L":
+      case "l":
         return "liters";
       case "gal":
         return "gallons";
