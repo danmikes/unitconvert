@@ -28,14 +28,14 @@ suite('Function convertHandler.getNum(input)', function () {
   })
 
 // 4. convertHandler should correctly read a fractional input with a decimal.
-  test('4. fractional input + decimal', function (done) {
+  test('4. fractional input + first decimal', function (done) {
     let input = '1.5/3L';
     assert.equal(convertHandler.getNum(input), 1.5 / 3);
     done();
   })
 
 // 4b. convertHandler should correctly read a fractional input with a decimal.
-  test('4b. fractional input + decimal', function (done) {
+  test('4b. extra: fractional input + second decimal', function (done) {
     let input = '1/3.5L';
     assert.equal(convertHandler.getNum(input), 1 / 3.5);
     done();
@@ -56,7 +56,7 @@ suite('Function convertHandler.getNum(input)', function () {
   })
 
 // 5b. extra: error on double-dot
-  test('5b. invalid input (double dot)', function (done) {
+  test('5b. extra: invalid input (double dot)', function (done) {
     let input = '1.2.2L';
     assert.equal(convertHandler.getNum(input), undefined);
     done();
